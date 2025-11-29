@@ -1,0 +1,22 @@
+# Format code with Prettier
+echo "🎨 Formatting code..."
+pnpm format
+
+# Fix ESLint issues
+echo "🔧 Fixing ESLint issues..."
+pnpm lint:fix
+
+# Run ESLint to check for remaining issues
+echo "🔍 Running ESLint..."
+pnpm lint
+
+# Optional: Build check (set SKIP_BUILD=1 to skip)
+if [ -z "$SKIP_BUILD" ]; then
+  echo "🏗️  Building project..."
+  pnpm build
+else
+  echo "⏭️  Skipping build (SKIP_BUILD is set)"
+fi
+
+echo "✅ Pre-commit checks passed!"
+
