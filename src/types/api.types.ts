@@ -33,11 +33,13 @@ export interface IVerifyCodePayload {
   code: number;
 }
 
-export type IVerifyCodeResponse = IApiResponse;
+export interface IVerifyCodeResponse extends IApiResponse {
+  data: string;
+}
 
 export interface IResetPasswordPayload {
-  email: string;
-  code: number;
+  password: string;
+  confirmPassword: string;
 }
 
 export type IResetPasswordResponse = IApiResponse;

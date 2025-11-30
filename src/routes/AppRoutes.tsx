@@ -10,6 +10,7 @@ import {
   VerifyCodePage,
 } from "@/pages";
 
+import { authLoader } from "./authLoader";
 import { ROUTE_PATHS } from "./route";
 
 export const router = createBrowserRouter([
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: authLoader,
         element: <HomePage />,
       },
       {

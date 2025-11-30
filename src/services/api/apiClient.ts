@@ -34,6 +34,12 @@ class ApiClient {
     return url.toString();
   }
 
+  private getAuthHeaders(): HeadersInit | null {
+    const token = localStorage.getItem("authToken");
+    if (!token) return null;
+    return { Authorization: `Bearer ${token}` };
+  }
+
   private createAbortController(timeout: number) {
     const controller = new AbortController();
     setTimeout(() => controller.abort(), timeout);
@@ -59,6 +65,10 @@ class ApiClient {
         },
         ...config,
       };
+
+      const authHeaders = this.getAuthHeaders();
+      if (authHeaders && fetchConfig && fetchConfig.headers)
+        Object.assign(fetchConfig.headers, authHeaders);
 
       const response = await fetch(url, fetchConfig);
 
@@ -110,12 +120,12 @@ class ApiClient {
     });
   }
 
-  public async patch<T>(
+  public async patch<RequestType, ResponseType = RequestType>(
     endpoint: string,
-    data?: Partial<T>,
+    data?: RequestType,
     config?: RequestConfig
-  ): Promise<T> {
-    return await this.request<T>("PATCH", endpoint, {
+  ): Promise<ResponseType> {
+    return await this.request<ResponseType>("PATCH", endpoint, {
       ...config,
       body: JSON.stringify(data),
     });
