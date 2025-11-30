@@ -1,5 +1,5 @@
-import {ROUTE_PATHS} from "@/routes/route.config"
+import { ROUTE_PATHS } from "@/routes/route";
 
 export const getRoutePath = (path: keyof typeof ROUTE_PATHS) => {
-    return ROUTE_PATHS[path] ?? "#";
-}
+  return ROUTE_PATHS[path] ?? "#";
+};

@@ -1,6 +1,3 @@
-
 export const SignupPage = () => {
-  return (
-    <div>LoginPage</div>
-  )
-}
+  return <div>LoginPage</div>;
+};

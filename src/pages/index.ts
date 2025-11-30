@@ -1,2 +1,2 @@
-export * from "./auth"
-export {HomePage} from "./HomePage/Index"
+export * from "./auth";
+export { HomePage } from "./HomePage/Index";
