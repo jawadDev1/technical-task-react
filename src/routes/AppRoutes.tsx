@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router";
 
+import App from "@/App";
 import {
   ForgotPasswordPage,
   HomePage,
@@ -8,8 +9,8 @@ import {
   SignupPage,
   VerifyCodePage,
 } from "@/pages";
+
 import { ROUTE_PATHS } from "./route";
-import App from "@/App";
 
 export const router = createBrowserRouter([
   {

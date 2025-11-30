@@ -16,13 +16,12 @@ export default defineConfig([
       js.configs.recommended,
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-      "prettier",
     ],
     plugins: {
       "simple-import-sort": simpleImportSort,
       "unused-imports": unusedImports,
       "@eslint-react": eslintReact,
+      "react-refresh": reactRefresh,
     },
     languageOptions: {
       ecmaVersion: 2020,
@@ -40,6 +39,7 @@ export default defineConfig([
       "no-unused-vars": "off",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+      "react-refresh/only-export-components": "warn",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
         "warn",
