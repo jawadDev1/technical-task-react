@@ -1,73 +1,181 @@
-# React + TypeScript + Vite
+# Technical Task React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project includes authentication features such as login, signup, and forgot password flows, along with an article listing section. State management is handled using Redux to manage authentication state and article data efficiently.
 
-Currently, two official plugins are available:
+![Login Page](assets/login.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Architecture Overview
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```
+src/
+├── store/
+│   ├── index.ts
+│   ├── rootReducer.ts
+│   └── hooks.ts
+│
+├── features/
+│   ├── auth/
+│   │   ├── authSlice.ts
+│   │   ├── authThunks.ts
+│   │   └── authSelectors.ts
+│   │
+│   └── articles/
+│       ├── articlesSlice.ts
+│       ├── articlesThunks.ts
+│       └── articlesSelectors.ts
+│
+├── ui/
+│   ├── common/
+│   ├── auth/
+│   └── blog/
+│
+├── services/
+│   ├── api/
+│   │   ├── apiClient.ts
+│   │   └── endpoints.ts
+│   ├── authService.ts
+│   └── articlesService.ts
+│
+├── lib/
+│   ├── utils.ts
+│
+├── types/
+│   └── api.types.ts
+│
+├── pages/
+│
+├── routes/
+│   ├── AppRoutes.tsx
+│   └── routes.config.ts
+│
+└── App.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+- **Language:** TypeScript
+- **Library:** React (v19.2.0)
+- **Styling:** Tailwind CSS 4
+- **Forms:** React Hook Form + Zod
+- **Linting:** ESLint + Prettier
+- **Git Hooks:** Husky + Commitlint
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## Development Setup
+
+### Prerequisites
+
+- **Node.js:** v22.20.0
+- **Package Manager:** pnpm 9+
+
+### Initial Setup
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/jawadDev1/technical-task-react.git
+cd technical-task-react
 ```
+
+2. **Install packages**
+
+```bash
+pnpm install
+```
+
+3. **Configure environment variables:**
+
+```bash
+cp .env.example .env.local
+```
+
+Edit .env.local and set your API URL:
+
+```bash
+VITE_APP_API_URL=https://your-api-url.com/
+```
+
+Note: make sure / is present at end of url.
+
+4. **Start the development server::**
+
+```bash
+pnpm dev
+```
+
+## ESLint Restrictions
+
+### Enforced Rules
+
+1. **Import sorting** - auto-sorted by eslint-plugin-simple-import-sort
+2. **Unicorn rules** - prevent abbreviations, enforce better practices
+
+### Auto-fix Imports
+
+```bash
+pnpm lint:fix
+```
+
+## Development Workflow
+
+### Start Development Server
+
+```bash
+pnpm dev
+```
+
+### Skip build check if required
+
+```bash
+SKIP_BUILD=1 git commit -m "feat: your message"
+```
+
+### Linting & Formatting
+
+```bash
+pnpm lint              # Check for errors
+pnpm lint:fix          # Auto-fix errors
+pnpm format            # Format with Prettier
+pnpm format:check      # Check formatting
+```
+
+## Git Commit Conventions
+
+This project uses **Conventional Commits** with Husky and Commitlint.
+
+### Commit Format
+
+```
+type(scope): subject
+
+body (optional)
+
+footer (optional)
+```
+
+### Types
+
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **style**: Code style changes (formatting, no logic change)
+- **refactor**: Code refactoring
+- **perf**: Performance improvements
+- **test**: Adding or updating tests
+- **chore**: Build process or auxiliary tool changes
+- **revert**: Revert a previous commit
+
+### Examples
+
+```bash
+git commit -m "feat: add product filtering feature"
+git commit -m "fix: resolve ProductCard image loading issue"
+git commit -m "refactor: restructure ui layer components"
+git commit -m "docs: update README with architecture guidelines"
+```
+
+### Pre-commit Hooks
+
+- **Husky** runs automatically before commits
+- Lints staged files
+- Validates commit message format
+- Rejects commits that don't follow conventions

@@ -44,7 +44,7 @@ export const HomePage = () => {
       onSessionTimeout: handleSessionTimeout,
     });
 
-    // idle.start();
+    idle.start();
 
     return () => {
       idle.stop();
