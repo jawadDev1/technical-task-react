@@ -110,12 +110,12 @@ class ApiClient {
     });
   }
 
-  public async patch<T>(
+  public async patch<RequestType, ResponseType = RequestType>(
     endpoint: string,
-    data?: Partial<T>,
+    data?: RequestType,
     config?: RequestConfig
-  ): Promise<T> {
-    return await this.request<T>("PATCH", endpoint, {
+  ): Promise<ResponseType> {
+    return await this.request<ResponseType>("PATCH", endpoint, {
       ...config,
       body: JSON.stringify(data),
     });

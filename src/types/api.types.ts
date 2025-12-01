@@ -36,8 +36,8 @@ export interface IVerifyCodePayload {
 export type IVerifyCodeResponse = IApiResponse;
 
 export interface IResetPasswordPayload {
-  email: string;
-  code: number;
+  password: string;
+  confirmPassword: string;
 }
 
 export type IResetPasswordResponse = IApiResponse;

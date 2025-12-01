@@ -50,7 +50,7 @@ export const authService = {
   resetPassword: async (
     payload: IResetPasswordPayload
   ): Promise<IResetPasswordResponse> => {
-    return await api.post<IResetPasswordPayload, IResetPasswordResponse>(
+    return await api.patch<IResetPasswordPayload, IResetPasswordResponse>(
       AUTH_ENDPOINTS.RESET_PASSWORD,
       payload
     );
