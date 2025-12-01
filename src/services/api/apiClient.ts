@@ -34,6 +34,12 @@ class ApiClient {
     return url.toString();
   }
 
+  private getAuthHeaders(): HeadersInit | null {
+    const token = localStorage.getItem("authToken");
+    if (!token) return null;
+    return { Authorization: `Bearer ${token}` };
+  }
+
   private createAbortController(timeout: number) {
     const controller = new AbortController();
     setTimeout(() => controller.abort(), timeout);
@@ -59,6 +65,10 @@ class ApiClient {
         },
         ...config,
       };
+
+      const authHeaders = this.getAuthHeaders();
+      if (authHeaders && fetchConfig && fetchConfig.headers)
+        Object.assign(fetchConfig.headers, authHeaders);
 
       const response = await fetch(url, fetchConfig);
 

@@ -3,7 +3,7 @@ import { Typography } from "@/components/common";
 
 export const AuthSidePanel = () => {
   return (
-    <div className="bg-primary flex h-full items-center justify-center">
+    <div className="bg-primary hidden h-full items-center justify-center md:flex">
       <div className="flex flex-col justify-center text-center">
         <img src={astronaut} />
 

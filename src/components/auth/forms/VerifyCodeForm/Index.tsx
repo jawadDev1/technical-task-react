@@ -94,7 +94,7 @@ export const VerifyCodeForm = ({
             onChange={(e) => handleCodeChange(e.target.value, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className={cn(
-              `au focus:border-primary h-[52px] w-[46px] rounded-2xl border-[1.5px] border-neutral-50 text-center text-xs text-neutral-900 transition-all duration-200 placeholder:text-neutral-600 focus:outline-none`,
+              `au focus:border-primary h-11 w-9 rounded-2xl border-[1.5px] border-neutral-50 text-center text-xs text-neutral-900 transition-all duration-200 placeholder:text-neutral-600 focus:outline-none md:h-[52px] md:w-[46px]`,
               { "border-red-500 bg-red-500/10": errors.code }
             )}
           />

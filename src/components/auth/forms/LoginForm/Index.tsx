@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { Button, Typography } from "@/components/common";
 import { MailIcon } from "@/components/icons";
@@ -28,12 +28,14 @@ export const LoginForm = () => {
 
   const dispatch = useAppDispatch();
   const { error, loading } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const onSubmit = async (data: LoginFormData) => {
     const result = await dispatch(login(data));
 
     if (login.fulfilled.match(result)) {
       showToast("Login successful!", "success");
+      navigate(getRoutePath("HOME"));
     } else if (login.rejected.match(result)) {
       showToast(error || "Login Failed", "error");
     }

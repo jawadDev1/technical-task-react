@@ -12,22 +12,30 @@ import {
 const authInitialState: IAuthState = {
   loading: false,
   error: null,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem("authToken") ? true : false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState: authInitialState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.isAuthenticated = false;
+      state.error = null;
+      localStorage.removeItem("authToken");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
         state.loading = true;
       })
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.isAuthenticated = true;
+
+        localStorage.setItem("authToken", action.payload.data);
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -62,9 +70,12 @@ const authSlice = createSlice({
       .addCase(verifyCode.pending, (state) => {
         state.loading = true;
       })
-      .addCase(verifyCode.fulfilled, (state) => {
+      .addCase(verifyCode.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
+        state.isAuthenticated = true;
+
+        localStorage.setItem("authToken", action.payload.data);
       })
       .addCase(verifyCode.rejected, (state, action) => {
         state.loading = false;
@@ -84,5 +95,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

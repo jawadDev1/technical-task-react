@@ -33,7 +33,9 @@ export interface IVerifyCodePayload {
   code: number;
 }
 
-export type IVerifyCodeResponse = IApiResponse;
+export interface IVerifyCodeResponse extends IApiResponse {
+  data: string;
+}
 
 export interface IResetPasswordPayload {
   password: string;

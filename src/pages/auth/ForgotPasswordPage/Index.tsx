@@ -25,12 +25,7 @@ const ForgotPasswordPage = () => {
 
   const handleSendMail = async (email: string): Promise<boolean> => {
     const result = await dispatch(forgotPassword({ email }));
-    console.log(
-      "result ========> ",
-      result,
-      forgotPassword.rejected.match(result),
-      forgotPassword.fulfilled.match(result)
-    );
+
     if (forgotPassword.fulfilled.match(result)) {
       showToast("verification email send successfully", "success");
     } else if (forgotPassword.rejected.match(result)) {
@@ -46,7 +41,7 @@ const ForgotPasswordPage = () => {
     if (step === "forgot") return setStep("verify");
     if (step === "verify") return setStep("reset");
 
-    return navigate(getRoutePath("LOGIN"));
+    return navigate(getRoutePath("HOME"));
   };
 
   const handleBack = () => {
