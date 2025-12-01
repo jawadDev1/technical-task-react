@@ -80,7 +80,7 @@ export const Pagination = ({
           onClick={() => handlePageClick(page)}
           disabled={page === "..."}
           className={cn(
-            "h-12 w-12 cursor-pointer text-[16px] transition-colors",
+            "h-12 w-12 cursor-pointer text-[16px] transition-colors focus:outline-none",
             page === currentPage
               ? "text-primary font-extrabold"
               : page === "..."
